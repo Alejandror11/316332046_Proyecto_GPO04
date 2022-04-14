@@ -110,6 +110,10 @@ int main()
     Model laptop((char*)"Models/Laptop/Laptop.obj");
     Model estante((char*)"Models/Estante/Estante.obj");
     Model escritorio((char*)"Models/Escritorio/Escritorio.obj");
+    Model libros1((char*)"Models/Libros/Libros_1.obj");
+    Model libros2((char*)"Models/Libros/Libros_2.obj");
+    Model silla((char*)"Models/Silla/Silla.obj");
+    Model sofa((char*)"Models/Sofa/Sofa.obj");
     glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
 
     float vertices[] = {
@@ -242,7 +246,11 @@ int main()
         //cama.Draw(lightingShader);
         //laptop.Draw(lightingShader);
         //estante.Draw(lightingShader);
-        escritorio.Draw(lightingShader);
+        //escritorio.Draw(lightingShader);
+        //libros1.Draw(lightingShader);
+        //libros2.Draw(lightingShader);
+        //silla.Draw(lightingShader);
+        sofa.Draw(lightingShader);
 
         glBindVertexArray(0);
 
