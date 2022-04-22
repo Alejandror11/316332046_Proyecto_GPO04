@@ -1,6 +1,6 @@
 # This file uses centimeters as units for non-parametric coordinates.
 
-mtllib Estante_F.mtl
+mtllib Estante.mtl
 g default
 v 0.415859 -0.000000 0.202732
 v 0.415859 1.205994 0.202732
