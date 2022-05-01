@@ -37,13 +37,28 @@ bool firstMouse = true;
 GLfloat deltaTime = 0.0f;	// Time between current frame and last frame
 GLfloat lastFrame = 0.0f;  	// Time of last frame
 
+//Animacion
+float puertaH1Rot = 0.0f;
+bool puertaH1Anim = false;
+bool puertaH1Cerrada = true;
+float laptop1H1Rot = 0.0f;
+bool laptop1H1Anim = false;
+bool laptop1H1Cerrada = false;
+
 int main()
 {
 	// Init GLFW
 	glfwInit();
 
+	// Set all the required options for GLFW
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Iluminacion 2", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Proyecto", nullptr, nullptr);
 
 	if (nullptr == window)
 	{
@@ -61,6 +76,9 @@ int main()
 	glfwSetKeyCallback(window, KeyCallback);
 	glfwSetCursorPosCallback(window, MouseCallback);
 
+	// GLFW Options
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
 	// Set this to true so GLEW knows to use a modern approach to retrieving function pointers and extensions
 	glewExperimental = GL_TRUE;
 	// Initialize GLEW to setup the OpenGL Function pointers
@@ -77,27 +95,45 @@ int main()
 	Shader lampShader("Shaders/lamp.vs", "Shaders/lamp.frag");
 
 	// Load models
+	// Fachada
+	Model barandillasMadFachada((char*)"Models/Fachada/Barandillas_Madera_Fachada.obj");
+	Model barandillasMetFachada((char*)"Models/Fachada/Barandillas_Metal_Fachada.obj");
+	Model baseFachada((char*)"Models/Fachada/Base_Fachada.obj");
+	Model chimeneasFachada((char*)"Models/Fachada/Chimeneas_Fachada.obj");
+	Model columnasFachada((char*)"Models/Fachada/Columnas_Fachada.obj");
+	Model detallesFachada((char*)"Models/Fachada/Detalles_Fachada.obj");
+	Model escalerasFachada((char*)"Models/Fachada/Escaleras_Fachada.obj");
+	Model marcosFachada((char*)"Models/Fachada/Marcos_Fachada.obj");
+	Model murosFachada((char*)"Models/Fachada/Muros_Fachada.obj");
+	Model puertaAFachada((char*)"Models/Fachada/PuertaA_Fachada.obj");
+	Model puertaB1Fachada((char*)"Models/Fachada/PuertaB1_Fachada.obj");
+	Model puertaB2Fachada((char*)"Models/Fachada/PuertaB2_Fachada.obj");
+	Model puertaSFachada((char*)"Models/Fachada/PuertaS_Fachada.obj");
+	Model techoFachada((char*)"Models/Fachada/Techo_Fachada.obj");
+	Model vidriosFachada((char*)"Models/Fachada/Vidrios_Fachada.obj");
+
 	// Habitacion_1
-	Model marcos((char*)"Models/Habitacion_1/Marcos.obj");
-	Model muroAtr((char*)"Models/Habitacion_1/Muro_Atr.obj");
-	Model muroDer((char*)"Models/Habitacion_1/Muro_Der.obj");
-	Model muroFre((char*)"Models/Habitacion_1/Muro_Fre.obj");
-	Model muroIzq((char*)"Models/Habitacion_1/Muro_Izq.obj");
-	Model piso((char*)"Models/Habitacion_1/Piso.obj");
-	Model puerta((char*)"Models/Habitacion_1/Puerta.obj");
-	Model ropero((char*)"Models/Habitacion_1/Ropero.obj");
-	Model techo((char*)"Models/Habitacion_1/Techo.obj");
-	Model ventanas1((char*)"Models/Habitacion_1/Ventanas_1.obj");
-	Model ventanas2((char*)"Models/Habitacion_1/Ventanas_2.obj");
+	Model marcosH1((char*)"Models/Habitacion_1/Marcos_H1.obj");
+	Model muroAtrH1((char*)"Models/Habitacion_1/Muro_Atr_H1.obj");
+	Model muroDerH1((char*)"Models/Habitacion_1/Muro_Der_H1.obj");
+	Model muroFreH1((char*)"Models/Habitacion_1/Muro_Fre_H1.obj");
+	Model muroIzqH1((char*)"Models/Habitacion_1/Muro_Izq_H1.obj");
+	Model pisoH1((char*)"Models/Habitacion_1/Piso_H1.obj");
+	Model puertaH1((char*)"Models/Habitacion_1/Puerta_H1.obj");
+	Model roperoH1((char*)"Models/Habitacion_1/Ropero_H1.obj");
+	Model techoH1((char*)"Models/Habitacion_1/Techo_H1.obj");
+	Model ventanas1H1((char*)"Models/Habitacion_1/Ventanas_1_H1.obj");
+	Model ventanas2H1((char*)"Models/Habitacion_1/Ventanas_2_H1.obj");
 	//Objetos
-	Model cama((char*)"Models/Cama/Cama_Final.obj");
-	Model laptop((char*)"Models/Laptop/Laptop.obj");
-	Model estante((char*)"Models/Estante/Estante.obj");
-	Model escritorio((char*)"Models/Escritorio/Escritorio.obj");
-	Model libros1((char*)"Models/Libros/Libros_1.obj");
-	Model libros2((char*)"Models/Libros/Libros_2.obj");
-	Model silla((char*)"Models/Silla/Silla.obj");
-	Model sofa((char*)"Models/Sofa/Sofa.obj");
+	Model camaH1((char*)"Models/Cama/Cama_H1.obj");
+	Model laptop1H1((char*)"Models/Laptop/Laptop1_H1.obj");
+	Model laptop2H1((char*)"Models/Laptop/Laptop2_H1.obj");
+	Model estanteH1((char*)"Models/Estante/Estante_H1.obj");
+	Model escritorioH1((char*)"Models/Escritorio/Escritorio_H1.obj");
+	Model libros1H1((char*)"Models/Libros/Libros1_H1.obj");
+	Model libros2H1((char*)"Models/Libros/Libros2_H1.obj");
+	Model sillaH1((char*)"Models/Silla/Silla_H1.obj");
+	Model sofaH1((char*)"Models/Sofa/Sofa_H1.obj");
 
 
 	// First, set the container's VAO (and VBO)
@@ -160,67 +196,183 @@ int main()
 		// Pass the matrices to the shader
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-
-		glm::mat4 model(1);
-		//Carga de modelo Habitación_1 
 		view = camera.GetViewMatrix();
+
+		//Carga de modelo Fachada
+		glm::mat4 model(1);
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
-		marcos.Draw(lightingShader);
+		barandillasMadFachada.Draw(lightingShader);
 
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
-		muroAtr.Draw(lightingShader);
+		barandillasMetFachada.Draw(lightingShader);
 
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
-		muroDer.Draw(lightingShader);
+		baseFachada.Draw(lightingShader);
 
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
-		muroFre.Draw(lightingShader);
+		chimeneasFachada.Draw(lightingShader);
 
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
-		muroIzq.Draw(lightingShader);
+		columnasFachada.Draw(lightingShader);
 
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
-		piso.Draw(lightingShader);
+		detallesFachada.Draw(lightingShader);
 
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
-		puerta.Draw(lightingShader);
+		escalerasFachada.Draw(lightingShader);
 
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
-		ropero.Draw(lightingShader);
+		marcosFachada.Draw(lightingShader);
 
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
-		techo.Draw(lightingShader);
+		murosFachada.Draw(lightingShader);
 
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
-		ventanas2.Draw(lightingShader);
+		puertaAFachada.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		puertaB1Fachada.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		puertaB2Fachada.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		puertaSFachada.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		techoFachada.Draw(lightingShader);
+
+		//Carga de modelo Habitación_1 
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		marcosH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		muroAtrH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		muroDerH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		muroFreH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		muroIzqH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		pisoH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(12.31f, 4.26f, -5.66f));
+		model = glm::rotate(model, glm::radians(puertaH1Rot), glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		puertaH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		roperoH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		techoH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		ventanas2H1.Draw(lightingShader);
 
 		//Carga de modelos de objetos de la Habitacion_1
 		model = glm::mat4(1);
-		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::translate(model, glm::vec3(0.6f, 0.0f, -3.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
-		sofa.Draw(lightingShader);
+		camaH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(12.008f, 4.827f, -1.868f));
+		model = glm::rotate(model, glm::radians(47.256f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(laptop1H1Rot), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		laptop1H1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(12.008f, 4.827f, -1.868f));
+		model = glm::rotate(model, glm::radians(47.256f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		laptop2H1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		estanteH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		escritorioH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		libros1H1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		libros2H1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		sillaH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		sofaH1.Draw(lightingShader);
 
 		//Codigo para objetos semitrasnparentes
 		glEnable(GL_BLEND);//Avtiva la funcionalidad para trabajar el canal alfa
@@ -231,7 +383,13 @@ int main()
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 1);
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlfa"), 1.0f, 1.0f, 1.0f, 0.5f);
-		ventanas1.Draw(lightingShader);
+		ventanas1H1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 1);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlfa"), 1.0f, 1.0f, 1.0f, 0.5f);
+		vidriosFachada.Draw(lightingShader);
 
 		glDisable(GL_BLEND);  //Desactiva el canal alfa 
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlfa"), 1.0f, 1.0f, 1.0f, 1.0f);
@@ -269,6 +427,54 @@ void DoMovement()
 	{
 		camera.ProcessKeyboard(RIGHT, deltaTime);
 	}
+
+	//Animacion Puerta H1
+	if (puertaH1Anim && puertaH1Cerrada)
+	{
+		if(puertaH1Rot>-90.0f)
+		{
+			 puertaH1Rot -= 0.5f;
+		}
+		else
+		{
+			puertaH1Cerrada = false;
+		}
+	}
+	else if(puertaH1Anim && !puertaH1Cerrada)
+	{
+		if (puertaH1Rot < 0.0f)
+		{
+			puertaH1Rot += 0.5f;
+		}
+		else
+		{
+			puertaH1Cerrada = true;
+		}
+	}
+
+	//Animacion Laptop1_H1
+	if (laptop1H1Anim && laptop1H1Cerrada)
+	{
+		if (laptop1H1Rot > -90.0f)
+		{
+			laptop1H1Rot -= 0.5f;
+		}
+		else
+		{
+			laptop1H1Cerrada = false;
+		}
+	}
+	else if (laptop1H1Anim && !laptop1H1Cerrada)
+	{
+		if (laptop1H1Rot < 0.0f)
+		{
+			laptop1H1Rot += 0.5f;
+		}
+		else
+		{
+			laptop1H1Cerrada = true;
+		}
+	}
 }
 
 // Is called whenever a key is pressed/released via GLFW
@@ -289,6 +495,16 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 		{
 			keys[key] = false;
 		}
+	}
+
+	if (keys[GLFW_KEY_1])
+	{
+		puertaH1Anim = !puertaH1Anim;
+	}
+
+	if (keys[GLFW_KEY_2])
+	{
+		laptop1H1Anim = !laptop1H1Anim;
 	}
 }
 
