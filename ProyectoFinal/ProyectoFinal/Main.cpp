@@ -44,6 +44,20 @@ bool puertaH1Cerrada = true;
 float laptop1H1Rot = 0.0f;
 bool laptop1H1Anim = false;
 bool laptop1H1Cerrada = false;
+float ventanaBH1Tra = 0.0f;
+bool ventanaBH1Anim = false;
+bool ventanaBH1Cerrada = true;
+float pajaroXTra = 0.0f;
+float pajaroZTra = 0.0f;
+float pajaroRot = 0.0f;
+float alasRot = 0.0f;
+bool alasAba = false;
+bool pajaroAnim = false;
+bool recorrido1Pajaro = true;
+bool recorrido2Pajaro = false;
+bool recorrido3Pajaro = false;
+bool recorrido4Pajaro = false;
+bool recorrido5Pajaro = false;
 
 int main()
 {
@@ -122,19 +136,28 @@ int main()
 	Model puertaH1((char*)"Models/Habitacion_1/Puerta_H1.obj");
 	Model roperoH1((char*)"Models/Habitacion_1/Ropero_H1.obj");
 	Model techoH1((char*)"Models/Habitacion_1/Techo_H1.obj");
-	Model ventanas1H1((char*)"Models/Habitacion_1/Ventanas_1_H1.obj");
-	Model ventanas2H1((char*)"Models/Habitacion_1/Ventanas_2_H1.obj");
-	//Objetos
-	Model camaH1((char*)"Models/Cama/Cama_H1.obj");
-	Model laptop1H1((char*)"Models/Laptop/Laptop1_H1.obj");
-	Model laptop2H1((char*)"Models/Laptop/Laptop2_H1.obj");
-	Model estanteH1((char*)"Models/Estante/Estante_H1.obj");
-	Model escritorioH1((char*)"Models/Escritorio/Escritorio_H1.obj");
-	Model libros1H1((char*)"Models/Libros/Libros1_H1.obj");
-	Model libros2H1((char*)"Models/Libros/Libros2_H1.obj");
-	Model sillaH1((char*)"Models/Silla/Silla_H1.obj");
-	Model sofaH1((char*)"Models/Sofa/Sofa_H1.obj");
+	Model ventana1AH1((char*)"Models/Habitacion_1/VentanaA_H1.obj");
+	Model ventana1BH1((char*)"Models/Habitacion_1/VentanaB_H1.obj");
+	Model vidrioVentana1AH1((char*)"Models/Habitacion_1/Vidrio_VentanaA_H1.obj");
+	Model vidrioVentana1BH1((char*)"Models/Habitacion_1/Vidrio_VentanaB_H1.obj");
+	Model ventana2AH1((char*)"Models/Habitacion_1/VentanaA_H1.obj");
+	Model ventana2BH1((char*)"Models/Habitacion_1/VentanaB_H1.obj");
+	Model vidrioVentana2AH1((char*)"Models/Habitacion_1/Vidrio_VentanaA_H1.obj");
+	Model vidrioVentana2BH1((char*)"Models/Habitacion_1/Vidrio_VentanaB_H1.obj");
 
+	//Objetos Habitacion 1
+	Model camaH1((char*)"Models/Objetos_H1/Cama/Cama_H1.obj");
+	Model laptop1H1((char*)"Models/Objetos_H1/Laptop/Laptop1_H1.obj");
+	Model laptop2H1((char*)"Models/Objetos_H1/Laptop/Laptop2_H1.obj");
+	Model estanteH1((char*)"Models/Objetos_H1/Estante/Estante_H1.obj");
+	Model escritorioH1((char*)"Models/Objetos_H1/Escritorio/Escritorio_H1.obj");
+	Model libros1H1((char*)"Models/Objetos_H1/Libros/Libros1_H1.obj");
+	Model libros2H1((char*)"Models/Objetos_H1/Libros/Libros2_H1.obj");
+	Model sillaH1((char*)"Models/Objetos_H1/Silla/Silla_H1.obj");
+	Model sofaH1((char*)"Models/Objetos_H1/Sofa/Sofa_H1.obj");
+	Model alaDerPajaro((char*)"Models/Objetos_H1/Pajaro/Ala_Derecha_Pajaro.obj");
+	Model alaIzqPajaro((char*)"Models/Objetos_H1/Pajaro/Ala_Izquierda_Pajaro.obj");
+	Model cuerpoPajaro((char*)"Models/Objetos_H1/Pajaro/Cuerpo_Pajaro.obj");
 
 	// First, set the container's VAO (and VBO)
 	GLuint VBO, VAO;
@@ -319,9 +342,28 @@ int main()
 		techoH1.Draw(lightingShader);
 
 		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(12.209f, 5.525f, -1.548f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
-		ventanas2H1.Draw(lightingShader);
+		ventana1AH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(12.209f, 5.525f+ventanaBH1Tra, -1.548f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		ventana1BH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(13.255f, 5.525f, -1.548f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		ventana2AH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(13.255f, 5.525f+ventanaBH1Tra, -1.548f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		ventana2BH1.Draw(lightingShader);
 
 		//Carga de modelos de objetos de la Habitacion_1
 		model = glm::mat4(1);
@@ -374,16 +416,61 @@ int main()
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
 		sofaH1.Draw(lightingShader);
 
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(7.0f+pajaroXTra, 5.0f, 4.0f+pajaroZTra));
+		model = glm::rotate(model, glm::radians(pajaroRot), glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		cuerpoPajaro.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(7.0f + pajaroXTra, 5.0f, 4.0f + pajaroZTra));
+		model = glm::rotate(model, glm::radians(pajaroRot), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(alasRot), glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		alaDerPajaro.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(7.0f + pajaroXTra, 5.0f, 4.0f + pajaroZTra));
+		model = glm::rotate(model, glm::radians(pajaroRot), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(-alasRot), glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		alaIzqPajaro.Draw(lightingShader);
+
 		//Codigo para objetos semitrasnparentes
 		glEnable(GL_BLEND);//Avtiva la funcionalidad para trabajar el canal alfa
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		//Carga de modelo de Habitacion_1
 		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(12.209f, 5.525f, -1.548f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 1);
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlfa"), 1.0f, 1.0f, 1.0f, 0.5f);
-		ventanas1H1.Draw(lightingShader);
+		vidrioVentana1AH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(12.209f, 5.525f+ventanaBH1Tra, -1.548f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 1);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlfa"), 1.0f, 1.0f, 1.0f, 0.5f);
+		vidrioVentana1BH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(13.255f, 5.525f, -1.548f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 1);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlfa"), 1.0f, 1.0f, 1.0f, 0.5f);
+		vidrioVentana2AH1.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(13.255f, 5.525f+ventanaBH1Tra, -1.548f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 1);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlfa"), 1.0f, 1.0f, 1.0f, 0.5f);
+		vidrioVentana2BH1.Draw(lightingShader);
 
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -475,6 +562,116 @@ void DoMovement()
 			laptop1H1Cerrada = true;
 		}
 	}
+
+	//Animacion Ventanas_H1
+	if (ventanaBH1Anim && ventanaBH1Cerrada)
+	{
+		if (5.525f+ventanaBH1Tra < 6.096f)
+		{
+			ventanaBH1Tra += 0.005f;
+		}
+		else
+		{
+			ventanaBH1Cerrada = false;
+		}
+	}
+	else if (ventanaBH1Anim && !ventanaBH1Cerrada)
+	{
+		if (5.525f+ventanaBH1Tra > 5.525f)
+		{
+			ventanaBH1Tra -= 0.005f;
+		}
+		else
+		{
+			ventanaBH1Cerrada = true;
+		}
+	}
+
+	//Animacion pajaro
+	if (pajaroAnim)
+	{
+		if (alasAba)
+		{
+			if (alasRot < 45.0f)
+			{
+				alasRot += 0.5;
+			}
+			else
+			{
+				alasAba = false;
+			}
+		}
+		if (!alasAba)
+		{
+			if (alasRot > -45.0f)
+			{
+				alasRot -= 0.5;
+			}
+			else
+			{
+				alasAba = true;
+			}
+		}
+
+		if (recorrido1Pajaro)
+		{
+			pajaroZTra += 0.02f;
+
+			if (pajaroZTra + 4.0f > 12.0f)
+			{
+				recorrido1Pajaro = false;
+				recorrido2Pajaro = true;
+			}
+		}
+		if (recorrido2Pajaro)
+		{
+			pajaroRot = 135.0f;
+			pajaroXTra += 0.02f;
+			pajaroZTra -= 0.02f;
+
+			if (pajaroXTra + 7.0f > 12.0f && pajaroZTra + 4.0f < 4.0f)
+			{
+				recorrido2Pajaro = false;
+				recorrido3Pajaro = true;
+
+			}
+		}
+		if (recorrido3Pajaro)
+		{
+			pajaroRot = 0.0f;
+			pajaroZTra += 0.02f;
+
+			if (pajaroZTra + 4.0f > 12.0f)
+			{
+				recorrido3Pajaro = false;
+				recorrido4Pajaro = true;
+			}
+		}
+
+		if (recorrido4Pajaro)
+		{
+			pajaroRot = -135.0f;
+			pajaroXTra -= 0.02f;
+			pajaroZTra -= 0.02f;
+
+			if (pajaroXTra + 7.0f < 7.0f && pajaroZTra + 4.0f < 4.0f)
+			{
+				recorrido4Pajaro = false;
+				recorrido5Pajaro = true;
+			}
+		}
+		if (recorrido5Pajaro)
+		{
+			pajaroRot = 0.0f;
+			pajaroZTra += 0.02f;
+
+			if (pajaroZTra + 4.0f > 4.0f)
+			{
+				recorrido5Pajaro = false;
+				recorrido1Pajaro = true;
+			}
+		}
+	}
 }
 
 // Is called whenever a key is pressed/released via GLFW
@@ -505,6 +702,16 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 	if (keys[GLFW_KEY_2])
 	{
 		laptop1H1Anim = !laptop1H1Anim;
+	}
+
+	if (keys[GLFW_KEY_3])
+	{
+		ventanaBH1Anim = !ventanaBH1Anim;
+	}
+
+	if (keys[GLFW_KEY_4])
+	{
+		pajaroAnim = !pajaroAnim;
 	}
 }
 
