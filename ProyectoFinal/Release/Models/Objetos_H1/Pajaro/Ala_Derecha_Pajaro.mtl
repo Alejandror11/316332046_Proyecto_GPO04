@@ -1,0 +1,36 @@
+newmtl Ala_Derecha_Ala_Derecha_Ala_Derecha_phong2SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Pajaro.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Ala_Izquierda_Ala_Izquierda_Ala_Izquierda_phong2SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Pajaro.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Cuerpo_Cuerpo_Cuerpo_phong2SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Pajaro.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Pajaro.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00

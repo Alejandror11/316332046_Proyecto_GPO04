@@ -1,4 +1,12 @@
-﻿#include <iostream>
+﻿/**
+    @file      Main.cpp
+    @brief     
+    @details   ~
+    @author    Antonio Roblero Alejandro Jesus
+    @date      2.05.2022
+**/
+
+#include <iostream>
 #include <cmath>
 // GLEW
 #include <GL/glew.h>
@@ -18,8 +26,27 @@
 #include "Model.h"
 
 // Function prototypes
+/**
+    @brief 
+    @param window   - 
+    @param key      - 
+    @param scancode - 
+    @param action   - 
+    @param mode     - 
+**/
 void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
+
+/**
+    @brief 
+    @param window - 
+    @param xPos   - 
+    @param yPos   - 
+**/
 void MouseCallback(GLFWwindow* window, double xPos, double yPos);
+
+/**
+    @brief 
+**/
 void DoMovement();
 
 // Window dimensions
@@ -38,15 +65,19 @@ GLfloat deltaTime = 0.0f;	// Time between current frame and last frame
 GLfloat lastFrame = 0.0f;  	// Time of last frame
 
 //Animacion
+//Puerta_H1
 float puertaH1Rot = 0.0f;
 bool puertaH1Anim = false;
 bool puertaH1Cerrada = true;
+//Laptop_H1
 float laptop1H1Rot = 0.0f;
 bool laptop1H1Anim = false;
 bool laptop1H1Cerrada = false;
+//Ventanas_H1
 float ventanaBH1Tra = 0.0f;
 bool ventanaBH1Anim = false;
 bool ventanaBH1Cerrada = true;
+//Pajaro
 float pajaroXTra = 0.0f;
 float pajaroZTra = 0.0f;
 float pajaroRot = 0.0f;
@@ -58,6 +89,27 @@ bool recorrido2Pajaro = false;
 bool recorrido3Pajaro = false;
 bool recorrido4Pajaro = false;
 bool recorrido5Pajaro = false;
+//Conejo
+float cuerpoConejoRotx = 0.0f;
+float cuerpoConejoRoty = 0.0f;
+float pata1DelRot = 0.0f;
+float pata1TraRot = 0.0f;
+float pata2DelRot = 0.0f;
+float pata2TraRot = 0.0f;
+float conejoTraX = 0.0f;
+float conejoTraY = 0.0f;
+float conejoTraZ = 0.0f;
+bool conejoAnim = false;
+bool recorrido1_1Conejo = true;
+bool recorrido1_2Conejo = false;
+bool recorrido1_3Conejo = false;
+bool recorrido2_1Conejo = false;
+bool recorrido2_2Conejo = false;
+bool recorrido2_3Conejo = false;
+bool recorrido3_1Conejo = false;
+bool recorrido3_2Conejo = false;
+bool recorrido3_3Conejo = false;
+bool recorrido4Conejo = false;
 
 int main()
 {
@@ -158,6 +210,15 @@ int main()
 	Model alaDerPajaro((char*)"Models/Objetos_H1/Pajaro/Ala_Derecha_Pajaro.obj");
 	Model alaIzqPajaro((char*)"Models/Objetos_H1/Pajaro/Ala_Izquierda_Pajaro.obj");
 	Model cuerpoPajaro((char*)"Models/Objetos_H1/Pajaro/Cuerpo_Pajaro.obj");
+	Model cuerpoConejo((char*)"Models/Objetos_H1/Conejo/Cuerpo_Conejo.obj");
+	Model pata1DelDer((char*)"Models/Objetos_H1/Conejo/Pata1_Delantera_Der.obj");
+	Model pata1DelIzq((char*)"Models/Objetos_H1/Conejo/Pata1_Delantera_Izq.obj");
+	Model pata1TraDer((char*)"Models/Objetos_H1/Conejo/Pata1_Trasera_Der.obj");
+	Model pata1TraIzq((char*)"Models/Objetos_H1/Conejo/Pata1_Trasera_Izq.obj");
+	Model pata2DelDer((char*)"Models/Objetos_H1/Conejo/Pata2_Delantera_Der.obj");
+	Model pata2DelIzq((char*)"Models/Objetos_H1/Conejo/Pata2_Delantera_Izq.obj");
+	Model pata2TraDer((char*)"Models/Objetos_H1/Conejo/Pata2_Trasera_Der.obj");
+	Model pata2TraIzq((char*)"Models/Objetos_H1/Conejo/Pata2_Trasera_Izq.obj");
 
 	// First, set the container's VAO (and VBO)
 	GLuint VBO, VAO;
@@ -223,6 +284,8 @@ int main()
 
 		//Carga de modelo Fachada
 		glm::mat4 model(1);
+		glm::mat4 modelTemp = glm::mat4(1.0f);
+		glm::mat4 modelTemp1 = glm::mat4(1.0f);
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
@@ -416,6 +479,7 @@ int main()
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
 		sofaH1.Draw(lightingShader);
 
+		//Carga del modelo del pajaro
 		model = glm::mat4(1);
 		model = glm::translate(model, glm::vec3(7.0f+pajaroXTra, 5.0f, 4.0f+pajaroZTra));
 		model = glm::rotate(model, glm::radians(pajaroRot), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -439,8 +503,70 @@ int main()
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
 		alaIzqPajaro.Draw(lightingShader);
 
+		//Carga del modelo del conejo
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(12.5f+conejoTraX, 4.23f+conejoTraY, -5.0f+conejoTraZ));
+		model = glm::rotate(model, glm::radians(cuerpoConejoRoty), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(cuerpoConejoRotx), glm::vec3(1.0f, 0.0f, 0.0f));
+		modelTemp = model;
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		cuerpoConejo.Draw(lightingShader);
+
+		model = glm::translate(modelTemp, glm::vec3(-0.06f, 0.1f, 0.03));
+		model = glm::rotate(model, glm::radians(pata1DelRot), glm::vec3(1.0f, 0.0f, 0.0f));
+		modelTemp1 = model;
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		pata1DelDer.Draw(lightingShader);
+
+		model = glm::translate(modelTemp1, glm::vec3(0.004, -0.098f, 0.005));
+		model = glm::rotate(model, glm::radians(pata2DelRot), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		pata2DelDer.Draw(lightingShader);
+
+		model = glm::translate(modelTemp, glm::vec3(0.06f, 0.1f, 0.03));
+		model = glm::rotate(model, glm::radians(pata1DelRot), glm::vec3(1.0f, 0.0f, 0.0f));
+		modelTemp1 = model;
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		pata1DelIzq.Draw(lightingShader);
+
+		model = glm::translate(modelTemp1, glm::vec3(-0.008f, -0.086f, 0.001));
+		model = glm::rotate(model, glm::radians(pata2DelRot), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		pata2DelIzq.Draw(lightingShader);
+
+		model = glm::translate(modelTemp, glm::vec3(-0.065f, 0.1f, -0.08));
+		model = glm::rotate(model, glm::radians(pata1TraRot), glm::vec3(1.0f, 0.0f, 0.0f));
+		modelTemp1 = model;
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		pata1TraDer.Draw(lightingShader);
+
+		model = glm::translate(modelTemp1, glm::vec3(0.013f, -0.078f, -0.028));
+		model = glm::rotate(model, glm::radians(pata2TraRot), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		pata2TraDer.Draw(lightingShader);
+
+		model = glm::translate(modelTemp, glm::vec3(0.07f, 0.1f, -0.08));
+		model = glm::rotate(model, glm::radians(pata1TraRot), glm::vec3(1.0f, 0.0f, 0.0f));
+		modelTemp1 = model;
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		pata1TraIzq.Draw(lightingShader);
+
+		model = glm::translate(modelTemp1, glm::vec3(-0.018f, -0.081f, -0.02));
+		model = glm::rotate(model, glm::radians(pata2TraRot), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		pata2TraIzq.Draw(lightingShader);
+
 		//Codigo para objetos semitrasnparentes
-		glEnable(GL_BLEND);//Avtiva la funcionalidad para trabajar el canal alfa
+		glEnable(GL_BLEND);//Activa la funcionalidad para trabajar el canal alfa
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		//Carga de modelo de Habitacion_1
@@ -594,7 +720,7 @@ void DoMovement()
 		{
 			if (alasRot < 45.0f)
 			{
-				alasRot += 0.5;
+				alasRot += 1;
 			}
 			else
 			{
@@ -605,7 +731,7 @@ void DoMovement()
 		{
 			if (alasRot > -45.0f)
 			{
-				alasRot -= 0.5;
+				alasRot -= 1;
 			}
 			else
 			{
@@ -672,6 +798,334 @@ void DoMovement()
 			}
 		}
 	}
+
+	//Animacion Conejo
+	if (conejoAnim)
+	{
+		if (recorrido1_1Conejo)
+		{
+			if ( cuerpoConejoRotx > -15.0f )
+			{
+				cuerpoConejoRotx -= 5.0f;
+			}
+			if ( pata1DelRot < 30.0f && pata1TraRot < 30.0f)
+			{
+				pata1DelRot += 8.0f;
+				pata1TraRot += 8.0f;
+			}
+			if (pata2DelRot < 20.0f && pata2TraRot < 20.0f)
+			{
+				pata2DelRot += 8.0f;
+				pata2TraRot += 8.0f;
+			}
+			if ((-5.0f + conejoTraZ) < -4.0f)
+			{
+				conejoTraZ += 0.02f;
+			}
+			if ((4.23f + conejoTraY) < 4.6)
+			{
+				conejoTraY += 0.0078f;
+			}
+			if ((-5.0f + conejoTraZ) > -4.0f && (4.23f + conejoTraY) > 4.6)
+			{
+				pata1TraRot = 30.0f;
+				pata2TraRot = 20.0f;
+				recorrido1_1Conejo = false;
+				recorrido1_2Conejo = true;
+			}
+		}
+		if (recorrido1_2Conejo)
+		{
+			if (cuerpoConejoRotx < 15.0f)
+			{
+				cuerpoConejoRotx += 5.0f;
+			}
+			if (pata1DelRot > -30.0f)
+			{
+				pata1DelRot -= 8.0f;
+			}
+			if (pata2DelRot > 0.0f)
+			{
+				pata2DelRot -= 8.0f;
+			}
+			if ((-5.0f + conejoTraZ) < -3.0f)
+			{
+				conejoTraZ += 0.02f;
+			}
+			if ((4.23f + conejoTraY) > 4.23)
+			{
+				conejoTraY -= 0.0078f;
+			}
+			if ((-5.0f + conejoTraZ) > -3.0f && (4.23f + conejoTraY) < 4.23)
+			{
+				pata1DelRot = -30.0f;
+				pata2DelRot = 0.0f;
+				recorrido1_2Conejo = false;
+				recorrido1_3Conejo = true;
+			}
+		}
+		if (recorrido1_3Conejo)
+		{
+			if (cuerpoConejoRotx > 0.0f)
+			{
+				cuerpoConejoRotx -= 5.0f;
+			}
+			if (pata1DelRot < 0.0f)
+			{
+				pata1DelRot += 5.0f;
+			}
+			if (pata1TraRot > 0.0f)
+			{
+				pata1TraRot -= 5.0f;
+			}
+			if (pata2TraRot > 0.0f)
+			{
+				pata2TraRot -= 5.0f;
+			}
+			if ((cuerpoConejoRotx >= 0.0f) && (pata1DelRot >= 0.0f) && (pata2TraRot >= 0.0f))
+			{
+				recorrido1_3Conejo = false;
+				recorrido2_1Conejo = true;
+			}
+		}
+		if (recorrido2_1Conejo)
+		{
+			cuerpoConejoRotx = 0.0f;
+			if (cuerpoConejoRoty > -90.0f)
+			{
+				cuerpoConejoRoty -= 10.0f;
+			}
+			else
+			{
+				cuerpoConejoRoty = -90.0f;
+			}
+			if (cuerpoConejoRotx > -15.0f)
+			{
+				cuerpoConejoRotx -= 5.0f;
+			}
+			if (pata1DelRot < 30.0f && pata1TraRot < 30.0f)
+			{
+				pata1DelRot += 8.0f;
+				pata1TraRot += 8.0f;
+			}
+			if (pata2DelRot < 20.0f && pata2TraRot < 20.0f)
+			{
+				pata2DelRot += 8.0f;
+				pata2TraRot += 8.0f;
+			}
+			if ((12.5f + conejoTraX) > 12.0f)
+			{
+				conejoTraX -= 0.02f;
+			}
+			if ((4.23f + conejoTraY) < 4.415)
+			{
+				conejoTraY += 0.0078f;
+			}
+			if ((12.5f + conejoTraX) <= 12.0f && (4.23f + conejoTraY) >= 4.415)
+			{
+				pata1TraRot = 30.0f;
+				pata2TraRot = 20.0f;
+				recorrido2_1Conejo = false;
+				recorrido2_2Conejo = true;
+			}
+		}
+		if (recorrido2_2Conejo)
+		{
+			if (cuerpoConejoRotx < 15.0f)
+			{
+				cuerpoConejoRotx += 5.0f;
+			}
+			if (pata1DelRot > -30.0f)
+			{
+				pata1DelRot -= 8.0f;
+			}
+			if (pata2DelRot > 0.0f)
+			{
+				pata2DelRot -= 8.0f;
+			}
+			if ((12.5f + conejoTraX) > 11.5f)
+			{
+				conejoTraX -= 0.02f;
+			}
+			if ((4.23f + conejoTraY) > 4.23)
+			{
+				conejoTraY -= 0.0078f;
+			}
+			if ((12.5f + conejoTraX) <= 11.5f && (4.23f + conejoTraY) <= 4.23)
+			{
+				pata1DelRot = -30.0f;
+				pata2DelRot = 0.0f;
+				recorrido2_2Conejo = false;
+				recorrido2_3Conejo = true;
+			}
+		}
+		if (recorrido2_3Conejo)
+		{
+			if (cuerpoConejoRotx > 0.0f)
+			{
+				cuerpoConejoRotx -= 5.0f;
+			}
+			if (pata1DelRot < 0.0f)
+			{
+				pata1DelRot += 5.0f;
+			}
+			if (pata1TraRot > 0.0f)
+			{
+				pata1TraRot -= 5.0f;
+			}
+			if (pata2TraRot > 0.0f)
+			{
+				pata2TraRot -= 5.0f;
+			}
+			if ((cuerpoConejoRotx >= 0.0f) && (pata1DelRot >= 0.0f) && (pata2TraRot >= 0.0f))
+			{
+				recorrido2_3Conejo = false;
+				recorrido3_1Conejo = true;
+			}
+		}
+		if (recorrido3_1Conejo)
+		{
+			cuerpoConejoRotx = 0.0f;
+			if (cuerpoConejoRoty > -225.0f)
+			{
+				cuerpoConejoRoty -= 10.0f;
+			}
+			else
+			{
+				cuerpoConejoRoty = -225.0f;
+			}
+			if (cuerpoConejoRotx > -15.0f)
+			{
+				cuerpoConejoRotx -= 5.0f;
+			}
+			if (pata1DelRot < 30.0f && pata1TraRot < 30.0f)
+			{
+				pata1DelRot += 8.0f;
+				pata1TraRot += 8.0f;
+			}
+			if (pata2DelRot < 20.0f && pata2TraRot < 20.0f)
+			{
+				pata2DelRot += 8.0f;
+				pata2TraRot += 8.0f;
+			}
+			if ((12.5f + conejoTraX) < 12.0f)
+			{
+				conejoTraX += 0.02f;
+			}
+			if ((-5.0f + conejoTraZ) > -4.0f)
+			{
+				conejoTraZ -= 0.04f;
+			}
+			if ((4.23f + conejoTraY) < 4.6)
+			{
+				conejoTraY += 0.02f;
+			}
+			if ((12.5f + conejoTraX) >= 12.0f && (4.23f + conejoTraY) >= 4.6 && (-5.0f + conejoTraZ) <= -4.0f)
+			{
+				pata1TraRot = 30.0f;
+				pata2TraRot = 20.0f;
+				recorrido3_1Conejo = false;
+				recorrido3_2Conejo = true;
+			}
+		}
+		if (recorrido3_2Conejo)
+		{
+			if (cuerpoConejoRotx < 15.0f)
+			{
+				cuerpoConejoRotx += 5.0f;
+			}
+			if (pata1DelRot > -30.0f)
+			{
+				pata1DelRot -= 8.0f;
+			}
+			if (pata2DelRot > 0.0f)
+			{
+				pata2DelRot -= 8.0f;
+			}
+			if ((12.5f + conejoTraX) < 12.5f)
+			{
+				conejoTraX += 0.02f;
+			}
+			if ((-5.0f + conejoTraZ) > -5.0f)
+			{
+				conejoTraZ -= 0.04f;
+			}
+			if ((4.23f + conejoTraY) > 4.23)
+			{
+				conejoTraY -= 0.02f;
+			}
+			if ((12.5f + conejoTraX) >= 12.5f && (4.23f + conejoTraY) <= 4.23 && (-5.0f + conejoTraZ) <= -5.0f)
+			{
+				pata1DelRot = -30.0f;
+				pata2DelRot = 0.0f;
+				recorrido3_2Conejo = false;
+				recorrido3_3Conejo = true;
+			}
+		}
+		if (recorrido3_3Conejo)
+		{
+			if (cuerpoConejoRotx > 0.0f)
+			{
+				cuerpoConejoRotx -= 5.0f;
+			}
+			if (pata1DelRot < 0.0f)
+			{
+				pata1DelRot += 5.0f;
+			}
+			if (pata1TraRot > 0.0f)
+			{
+				pata1TraRot -= 5.0f;
+			}
+			if (pata2TraRot > 0.0f)
+			{
+				pata2TraRot -= 5.0f;
+			}
+			if ((cuerpoConejoRotx >= 0.0f) && (pata1DelRot >= 0.0f) && (pata2TraRot >= 0.0f))
+			{
+				recorrido3_3Conejo = false;
+				recorrido4Conejo = true;
+			}
+		}
+		if (recorrido4Conejo)
+		{
+			cuerpoConejoRotx = 0.0f;
+			if (cuerpoConejoRoty > -360.0f)
+			{
+				cuerpoConejoRoty -= 10.0f;
+			}
+			else
+			{
+				cuerpoConejoRoty = 0.0f;
+			}
+			if (cuerpoConejoRotx > -15.0f)
+			{
+				cuerpoConejoRotx -= 5.0f;
+			}
+			if (pata1DelRot < 30.0f && pata1TraRot < 30.0f)
+			{
+				pata1DelRot += 8.0f;
+				pata1TraRot += 8.0f;
+			}
+			if (pata2DelRot < 20.0f && pata2TraRot < 20.0f)
+			{
+				pata2DelRot += 8.0f;
+				pata2TraRot += 8.0f;
+			}
+			if ((-5.0f + conejoTraZ) < -4.0f)
+			{
+				conejoTraZ += 0.02f;
+			}
+			if ((4.23f + conejoTraY) < 4.6)
+			{
+				conejoTraY += 0.0078f;
+			}
+			if (cuerpoConejoRoty > -15.0f)
+			{
+				recorrido4Conejo = false;
+				recorrido1_1Conejo = true;
+			}
+		}
+	}
 }
 
 // Is called whenever a key is pressed/released via GLFW
@@ -712,6 +1166,11 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 	if (keys[GLFW_KEY_4])
 	{
 		pajaroAnim = !pajaroAnim;
+	}
+
+	if (keys[GLFW_KEY_5])
+	{
+		conejoAnim = !conejoAnim;
 	}
 }
 
