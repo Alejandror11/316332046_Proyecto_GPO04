@@ -1,8 +1,8 @@
 ﻿/**
     @file      Main.cpp
-    @brief     
+    @brief     Main program where the environment and the objects to represent with their respective textures are loaded
     @details   ~
-    @author    Antonio Roblero Alejandro Jesus
+    @author    316332046 Antonio Roblero Alejandro Jesus
     @date      2.05.2022
 **/
 
@@ -26,27 +26,8 @@
 #include "Model.h"
 
 // Function prototypes
-/**
-    @brief 
-    @param window   - 
-    @param key      - 
-    @param scancode - 
-    @param action   - 
-    @param mode     - 
-**/
 void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
-
-/**
-    @brief 
-    @param window - 
-    @param xPos   - 
-    @param yPos   - 
-**/
 void MouseCallback(GLFWwindow* window, double xPos, double yPos);
-
-/**
-    @brief 
-**/
 void DoMovement();
 
 // Window dimensions
@@ -64,7 +45,7 @@ bool firstMouse = true;
 GLfloat deltaTime = 0.0f;	// Time between current frame and last frame
 GLfloat lastFrame = 0.0f;  	// Time of last frame
 
-//Animacion
+//Animation
 //Puerta_H1
 float puertaH1Rot = 0.0f;
 bool puertaH1Anim = false;
@@ -111,6 +92,10 @@ bool recorrido3_2Conejo = false;
 bool recorrido3_3Conejo = false;
 bool recorrido4Conejo = false;
 
+/**
+    @brief  It is the main function that executes the program
+    @retval  - 
+**/
 int main()
 {
 	// Init GLFW
@@ -158,7 +143,6 @@ int main()
 	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	Shader lightingShader("Shaders/lighting.vs", "Shaders/lighting.frag");
-	Shader lampShader("Shaders/lamp.vs", "Shaders/lamp.frag");
 
 	// Load models
 	// Fachada
@@ -207,9 +191,13 @@ int main()
 	Model libros2H1((char*)"Models/Objetos_H1/Libros/Libros2_H1.obj");
 	Model sillaH1((char*)"Models/Objetos_H1/Silla/Silla_H1.obj");
 	Model sofaH1((char*)"Models/Objetos_H1/Sofa/Sofa_H1.obj");
+	
+	//Objeto Pajaro
 	Model alaDerPajaro((char*)"Models/Objetos_H1/Pajaro/Ala_Derecha_Pajaro.obj");
 	Model alaIzqPajaro((char*)"Models/Objetos_H1/Pajaro/Ala_Izquierda_Pajaro.obj");
 	Model cuerpoPajaro((char*)"Models/Objetos_H1/Pajaro/Cuerpo_Pajaro.obj");
+
+	//Objeto Conejo
 	Model cuerpoConejo((char*)"Models/Objetos_H1/Conejo/Cuerpo_Conejo.obj");
 	Model pata1DelDer((char*)"Models/Objetos_H1/Conejo/Pata1_Delantera_Der.obj");
 	Model pata1DelIzq((char*)"Models/Objetos_H1/Conejo/Pata1_Delantera_Izq.obj");
@@ -429,11 +417,13 @@ int main()
 		ventana2BH1.Draw(lightingShader);
 
 		//Carga de modelos de objetos de la Habitacion_1
+		//Cama
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
 		camaH1.Draw(lightingShader);
 
+		//Laptop
 		model = glm::mat4(1);
 		model = glm::translate(model, glm::vec3(12.008f, 4.827f, -1.868f));
 		model = glm::rotate(model, glm::radians(47.256f), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -449,16 +439,19 @@ int main()
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
 		laptop2H1.Draw(lightingShader);
 
+		//Estante
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
 		estanteH1.Draw(lightingShader);
 
+		//Escritorio
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
 		escritorioH1.Draw(lightingShader);
 
+		//Libros
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
@@ -469,11 +462,13 @@ int main()
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
 		libros2H1.Draw(lightingShader);
 
+		//Silla
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
 		sillaH1.Draw(lightingShader);
 
+		//Sofa
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
@@ -598,6 +593,7 @@ int main()
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlfa"), 1.0f, 1.0f, 1.0f, 0.5f);
 		vidrioVentana2BH1.Draw(lightingShader);
 
+		//Carga de modelao de la Fachada
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 1);
@@ -617,7 +613,9 @@ int main()
 	return 0;
 }
 
-// Moves/alters the camera positions based on user input
+/**
+    @brief Moves/alters the camera positions based on user input
+**/
 void DoMovement()
 {
 	// Camera controls
@@ -1128,7 +1126,12 @@ void DoMovement()
 	}
 }
 
-// Is called whenever a key is pressed/released via GLFW
+/**
+    @brief Is called whenever a key is pressed/released via GLFW
+    @param window   - a handle to the created window object
+    @param key      - saves the key that is entered by keyboard
+    @param action   - saves if the key is pressed or released
+**/
 void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
 	if (GLFW_KEY_ESCAPE == key && GLFW_PRESS == action)
@@ -1174,6 +1177,12 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 	}
 }
 
+/**
+    @brief whenever the mouse moves, this callback is called
+    @param window - a handle to the created window object
+    @param xPos   - save mouse x position
+    @param yPos   - save mouse y position
+**/
 void MouseCallback(GLFWwindow* window, double xPos, double yPos)
 {
 	if (firstMouse)
