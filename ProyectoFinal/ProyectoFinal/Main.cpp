@@ -191,6 +191,27 @@ int main()
 	Model libros2H1((char*)"Models/Objetos_H1/Libros/Libros2_H1.obj");
 	Model sillaH1((char*)"Models/Objetos_H1/Silla/Silla_H1.obj");
 	Model sofaH1((char*)"Models/Objetos_H1/Sofa/Sofa_H1.obj");
+
+	//Habitación_2
+	Model paredDelH2((char*)"Models/Habitacion_2/Pared_Del_H2.obj");
+	Model paredDerH2((char*)"Models/Habitacion_2/Pared_Der_H2.obj");
+	Model paredIzqH2((char*)"Models/Habitacion_2/Pared_Izq_H2.obj");
+	Model paredTraH2((char*)"Models/Habitacion_2/Pared_Tra_H2.obj");
+	Model persiana1H2((char*)"Models/Habitacion_2/Persiana1_H2.obj");
+	Model persiana2H2((char*)"Models/Habitacion_2/Persiana2_H2.obj");
+	Model pisoH2((char*)"Models/Habitacion_2/Piso_H2.obj");
+	Model puertaH2((char*)"Models/Habitacion_2/Puerta_H2.obj");
+	Model roperoH2((char*)"Models/Habitacion_2/Ropero_H2.obj");
+	Model techoH2((char*)"Models/Habitacion_2/Techo_H2.obj");
+	Model ventanaMarcoH2((char*)"Models/Habitacion_2/Ventana_Marco_H2.obj");
+	Model ventanaVidrioH2((char*)"Models/Habitacion_2/Ventana_Vidrio_H2.obj");
+
+	//Objetos Habitacion 2
+	Model camaH2((char*)"Models/Objetos_H2/Cama/Cama_H2.obj");
+	Model comodaH2((char*)"Models/Objetos_H2/Comoda/Comoda_H2.obj");
+	Model escritorioH2((char*)"Models/Objetos_H2/Escritorio/Escritorio_H2.obj");
+	Model sillaH2((char*)"Models/Objetos_H2/Silla/Silla_H2.obj");
+	Model sofaH2((char*)"Models/Objetos_H2/Sofa/Sofa_H2.obj");
 	
 	//Objeto Pajaro
 	Model alaDerPajaro((char*)"Models/Objetos_H1/Pajaro/Ala_Derecha_Pajaro.obj");
@@ -474,6 +495,93 @@ int main()
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
 		sofaH1.Draw(lightingShader);
 
+		//Carga de modelo Habitación_2
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		paredDelH2.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		paredDerH2.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		paredIzqH2.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		paredTraH2.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		persiana1H2.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		persiana2H2.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		pisoH2.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		puertaH2.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		roperoH2.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		techoH2.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		ventanaMarcoH2.Draw(lightingShader);
+
+		//Carga de modelos de objetos de la Habitacion_2
+		//Cama
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		camaH2.Draw(lightingShader);
+
+		//Comoda
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		comodaH2.Draw(lightingShader);
+
+		//Escritorio
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		escritorioH2.Draw(lightingShader);
+
+		//Silla
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		sillaH2.Draw(lightingShader);
+
+		//Sofa
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		sofaH2.Draw(lightingShader);
+
 		//Carga del modelo del pajaro
 		model = glm::mat4(1);
 		model = glm::translate(model, glm::vec3(7.0f+pajaroXTra, 5.0f, 4.0f+pajaroZTra));
@@ -592,6 +700,13 @@ int main()
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 1);
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlfa"), 1.0f, 1.0f, 1.0f, 0.5f);
 		vidrioVentana2BH1.Draw(lightingShader);
+
+		//Carga de modelo de Habitacion_2
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 1);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlfa"), 1.0f, 1.0f, 1.0f, 0.5f);
+		ventanaVidrioH2.Draw(lightingShader);
 
 		//Carga de modelao de la Fachada
 		model = glm::mat4(1);

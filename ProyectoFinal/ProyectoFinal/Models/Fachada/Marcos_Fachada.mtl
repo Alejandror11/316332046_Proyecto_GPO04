@@ -3,7 +3,6 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
-map_Kd T_Almoada-1.png
 Ni 1.00
 Ks 0.00 0.00 0.00
 Ns 0.00
@@ -12,7 +11,6 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
-map_Kd T_Almoada-2.png
 Ni 1.00
 Ks 0.00 0.00 0.00
 Ns 0.00
@@ -21,7 +19,6 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd T_Escritorio.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 18.00
@@ -30,7 +27,6 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd T_Estante.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 18.00
@@ -39,7 +35,6 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd T_Carcasa.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 18.00
@@ -48,7 +43,6 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd T_Pantalla.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 18.00
@@ -57,7 +51,6 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd T_Papel.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 18.00
@@ -66,10 +59,17 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd T_Papel.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 18.00
+newmtl MT_Doors_Interior03
+illum 4
+Kd 0.80 0.80 0.80
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
 newmtl Marcos_phong11SG
 illum 4
 Kd 0.00 0.00 0.00
@@ -115,6 +115,150 @@ map_Kd TX_Pared.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 18.00
+newmtl Pared_Del_H2_phong6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Pared_Ladrillo.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Pared_Del_H2_phong7SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Pared_Ladrillo.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Pared_Del_H2_phong8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Pared_Ladrillo.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Pared_Del_H2_phong17SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Marco.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Pared_Del_H2_phong18SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Marco.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Pared_Der_H2_phong9SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Pared.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Pared_Der_H2_phong11SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Pared.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Pared_Der_H2_phong15SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Marco.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Pared_Izq_H2_phong12SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Pared.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Pared_Izq_H2_phong13SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Pared.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Pared_Izq_H2_phong16SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Marco.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Pared_Tra_H2_phong10SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Pared.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Pared_Tra_H2_phong14SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Marco.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Persiana1_H2_phong5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Persiana.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Persiana2_H2_phong4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Persiana.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Piso_H2_phong1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Piso.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
 newmtl Piso_phong10SG
 illum 4
 Kd 0.00 0.00 0.00
@@ -124,12 +268,30 @@ map_Kd TX_Piso.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 18.00
+newmtl Puerta_H2_phong2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Puerta.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
 newmtl Puerta_phong9SG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 map_Kd TX_Puerta.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Ropero_H2_phong3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Ropero.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 18.00
@@ -147,7 +309,6 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd T_Madera.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 18.00
@@ -156,7 +317,6 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd T_Tela.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 18.00
@@ -165,7 +325,15 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd T_Madera.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Techo_H2_phong23SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Techo.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 18.00
@@ -184,6 +352,42 @@ Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 map_Kd TX_Pared.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Ventana_Marco_H2_phong19SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Marco.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Ventana_Marco_H2_phong20SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Marco.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Ventana_Vidrio_H2_phong21SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Ventana.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Ventana_Vidrio_H2_phong22SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TX_Ventana.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 18.00
@@ -210,7 +414,6 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd T_Cama.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 18.00
@@ -219,7 +422,6 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd T_Sabana.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 0.06
@@ -228,7 +430,6 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd T_Colchon.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 18.00
