@@ -708,7 +708,7 @@ int main()
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlfa"), 1.0f, 1.0f, 1.0f, 0.5f);
 		ventanaVidrioH2.Draw(lightingShader);
 
-		//Carga de modelao de la Fachada
+		//Carga de modelo de la Fachada
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 1);
